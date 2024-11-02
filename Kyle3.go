@@ -21,36 +21,36 @@ import (
 )
 
 // Question custom data type definition
-struct Question type (
+type Question struct {
 	Text string
 	Answer1 string
 	Answer2 string
 	Answer3 string
 	Answer4 string
 	Answer5 string
-)
+}
 
 // Getter for question text
-func (Question q) GetText() string {
+func (q Question) GetText() string {
 	return q.Text
 }
 
 
 // Display one of the provided answers to the terminal at random
-func {q Question} DisplayRandomAnswer() {
+func (q Question) DisplayRandomAnswer() {
 
 	// Generate random answer number between 1 and 5 
-	var randomAnswer bool = rand.Intn(5)+1
+	var randomAnswer int = rand.Intn(5)+1
 
 	// Display the corresponding answer depending upon the random number
-	case randomAnswer {
-		switch 1:
+	switch randomAnswer {
+		case 1:
 			fmt.Println(q.Answer1)
-		switch 2:
+		case 2:
 			fmt.Println(q.Answer2)
-		switch 3:
+		case 3:
 			fmt.Println(q.Answer3)
-		switch 4:
+		case 4:
 			fmt.Println(q.Answer4)
 		default:
 			fmt.Println(q.Answer5)
@@ -58,14 +58,14 @@ func {q Question} DisplayRandomAnswer() {
 }
 
 // init() function runs before any other functions
-func init {
+func init() {
 	
 	// Seed the random number generator with the current time
 	rand.Seed(int64(time.Now().Nanosecond()))
 }
 
 // Psuedo-constructor function for Question data type
-func NewQuestion(text string answer1 string answer2 string answer3 string answer4 string answer5 string) Question {
+func NewQuestion(text string, answer1 string, answer2 string, answer3 string, answer4 string, answer5 string) Question {
 	var q Question
 	q.Text = text
 	q.Answer1 = answer1
@@ -120,9 +120,9 @@ func main() {
 		var questionChoice int
 
 		// Asks which future category the user would like to be told about
-		format.Println("1.", question1.GetText())
-		format.Println("2.", question2.GetText())
-		format.Println("3.", question3.GetText())
+		fmt.Println("1.", question1.GetText())
+		fmt.Println("2.", question2.GetText())
+		fmt.Println("3.", question3.GetText())
 		
 		// Read in and store the user's choice
 		fmt.Scanln(&questionChoice)
@@ -132,22 +132,22 @@ func main() {
 		switch questionChoice {
 
 			//Who will I marry answers
-			option 1:
+			case 1:
 
 				question1.DisplayRandomAnswer()
 				
 			// What kind of professional career will I have answers
-			option 2:
+			case 2:
 
 				question2.DisplayRandomAnswer()
 			
 			// How long will I live answers
-			option 3;
+			case 3:
 
 				question3.DisplayRandomAnswer()
 
 			// Message to display if the user selects an invalid option
-			defaulting:
+			default:
 
 				fmt.Println("All you had to do was push 1, 2, or 3 and you managed to somehow mess that up...")
 				fmt.Println("I see a lot failure in your future.")
@@ -155,6 +155,6 @@ func main() {
 
 		// Figure out if they want to run the program again
 		fmt.Println("\nDare to know more? (y = yes, n = no)")
-		fmt.Scanln(*again)
+		fmt.Scanln(&again)
 	}
 }
